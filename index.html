@@ -189,7 +189,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-09-16 22:51:06 / 修改时间：23:37:43" itemprop="dateCreated datePublished" datetime="2021-09-16T22:51:06+08:00">2021-09-16</time>
+              <time title="创建时间：2021-09-16 22:51:06 / 修改时间：23:54:24" itemprop="dateCreated datePublished" datetime="2021-09-16T22:51:06+08:00">2021-09-16</time>
             </span>
 
           
@@ -210,11 +210,11 @@
 <p>在将默认显示管理器中的<code>lightdm</code>改为<code>gdm</code>后，重启的Ubuntu就陷入了时间无底洞</p>
 <p><img src="%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94Unity%E4%B8%8EGNOME%E6%A1%8C%E9%9D%A2%E5%88%87%E6%8D%A2.assets/image-20210914224212799.png" alt="image-20210914224212799"></p>
 <p>很明显可以从报错信息中看到<code>Failed to start Light Display Manager</code>这段字符串，基本判定是修改那个配置文件导致（至于错误原因还在考究，需要查找一下正确的桌面切换方式）</p>
-<h3 id="填坑经过"><a href="#填坑经过" class="headerlink" title="填坑经过"></a>填坑经过</h3><h5 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h5><p>重启可以解决99.99%的问题，巧了，它刚好就是那0.01%</p>
-<h5 id="干等"><a href="#干等" class="headerlink" title="干等"></a>干等</h5><p>看上图，放了5分钟都没动静，就完全可以排除开机慢这种情况，这就是一个时间无底洞，不等了，直接找度娘</p>
-<h5 id="搜索无果"><a href="#搜索无果" class="headerlink" title="搜索无果"></a>搜索无果</h5><p>百度搜索报错信息，找不到相同的问题和相关的回答</p>
-<h5 id="广开撒网"><a href="#广开撒网" class="headerlink" title="广开撒网"></a>广开撒网</h5><p>搜索关键词，描述当前的情况，如Ubuntu系统、虚拟机、启动不了等，以及修改了哪个目录下的哪个文件的哪条信息，图中的最后一句 “A start job…finishes up”也尝试拿去搜索。解决方法还没找到，先是发现了一堆相互copy的博客文章，还有一些说法是按F1、F2等键位后修改一些配置文件就能解决问题，然而对于我这台虚拟机中的Ubuntu20，没有任何作用，它只会在Ubuntu图标那个界面一直转圈圈，或是停留在上面图片显示的位置。</p>
-<h5 id="U盘启动"><a href="#U盘启动" class="headerlink" title="U盘启动"></a>U盘启动</h5><p>经过一番挖掘，终于找到了一篇相同问题且回答感觉比较可行的文章</p>
+<h3 id="填坑经过"><a href="#填坑经过" class="headerlink" title="填坑经过"></a>填坑经过</h3><h4 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h4><p>重启可以解决99.99%的问题，巧了，它刚好就是那0.01%</p>
+<h4 id="干等"><a href="#干等" class="headerlink" title="干等"></a>干等</h4><p>看上图，放了5分钟都没动静，就完全可以排除开机慢这种情况，这就是一个时间无底洞，不等了，直接找度娘</p>
+<h4 id="搜索无果"><a href="#搜索无果" class="headerlink" title="搜索无果"></a>搜索无果</h4><p>百度搜索报错信息，找不到相同的问题和相关的回答</p>
+<h4 id="广开撒网"><a href="#广开撒网" class="headerlink" title="广开撒网"></a>广开撒网</h4><p>搜索关键词，描述当前的情况，如Ubuntu系统、虚拟机、启动不了等，以及修改了哪个目录下的哪个文件的哪条信息，图中的最后一句 “A start job…finishes up”也尝试拿去搜索。解决方法还没找到，先是发现了一堆相互copy的博客文章，还有一些说法是按F1、F2等键位后修改一些配置文件就能解决问题，然而对于我这台虚拟机中的Ubuntu20，没有任何作用，它只会在Ubuntu图标那个界面一直转圈圈，或是停留在上面图片显示的位置。</p>
+<h4 id="U盘启动"><a href="#U盘启动" class="headerlink" title="U盘启动"></a>U盘启动</h4><p>经过一番挖掘，终于找到了一篇相同问题且回答感觉比较可行的文章</p>
 <p><img src="%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94Unity%E4%B8%8EGNOME%E6%A1%8C%E9%9D%A2%E5%88%87%E6%8D%A2.assets/image-20210914235036362.png" alt="image-20210914235036362"></p>
 <p>开始U盘启动盘的制作之旅~</p>
 <p>首先用UltraISO打开Ubuntu的ISO文件，然后选择启动中的写入硬盘映像，这里需要将U盘格式化，由于是用于Linux系统，UltralSO会要求将U盘转为FAT32文件系统</p>
@@ -241,7 +241,7 @@
 <p>报错。。。</p>
 <p><code>cannot allocate memory</code></p>
 <p>无法分配内存？！经过一番检查发现，原有的硬盘有20多G，而我使用的U盘只有14.8G，内存不够无法挂载，竟是硬伤 (இдஇ; )</p>
-<h5 id="格局打开"><a href="#格局打开" class="headerlink" title="格局打开"></a>格局打开</h5><p>按道理U盘启动的方法是可行的，只是因为受到硬件问题的限制</p>
+<h4 id="格局打开"><a href="#格局打开" class="headerlink" title="格局打开"></a>格局打开</h4><p>按道理U盘启动的方法是可行的，只是因为受到硬件问题的限制</p>
 <p>但这个方法操作上确实比较麻烦，后来从大佬那里得知一个特别便捷的操作方式，格局瞬间打开</p>
 <p>只要将那个被修改了文件的Ubuntu硬盘添加到另一个虚拟机上（需要是Linux系统），操作和上面添加U盘启动盘的一样，只要注意选择使用现有虚拟磁盘，并选择对应的vmdk文件即可，我将其添加到了kali机上，开机后就能看到两个可移动卷，分别是系统分区和个人文件分区的文件，找到被修改的文件将内容改回来并保存，将这块硬盘从kali机上移除，然后就可以正常启动Ubuntu了。</p>
 <p><img src="%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94Unity%E4%B8%8EGNOME%E6%A1%8C%E9%9D%A2%E5%88%87%E6%8D%A2.assets/image-20210916145104547.png" alt="image-20210916145104547"></p>
