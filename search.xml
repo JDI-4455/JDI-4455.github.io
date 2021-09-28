@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>踩坑记录——Unity与GNOME桌面切换</title>
+    <url>/2021/09/16/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94Unity%E4%B8%8EGNOME%E6%A1%8C%E9%9D%A2%E5%88%87%E6%8D%A2/</url>
+    <content><![CDATA[<h3 id="事件起因"><a href="#事件起因" class="headerlink" title="事件起因"></a>事件起因</h3><p>在进行Ubuntu的Unity和GNOME桌面环境实验过程中，Ubuntu系统已经安装并使用了Unity桌面，在从Unity切换为GNOME的时候</p>
+<p>出事了……</p>
+<span id="more"></span>
+
+<p><strong>肇事文章：</strong></p>
+<p><img src="https://i.loli.net/2021/09/27/47OI9pfRYDjtrsb.png" alt="Ftm9VIxM8wSpzG7-16327570456852.png"></p>
+<p>在将默认显示管理器中的<code>lightdm</code>改为<code>gdm</code>后，重启的Ubuntu就陷入了时间无底洞</p>
+<p><img src="https://i.loli.net/2021/09/27/29SeOowVJlZk1zP.png" alt="29SeOowVJlZk1zP.png"></p>
+<p>很明显可以从报错信息中看到<code>Failed to start Light Display Manager</code>这段字符串，基本判定是修改那个配置文件导致（至于错误原因还在考究，需要查找一下正确的桌面切换方式）</p>
+<h3 id="填坑经过"><a href="#填坑经过" class="headerlink" title="填坑经过"></a>填坑经过</h3><h4 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h4><p>重启可以解决99.99%的问题，巧了，它刚好就是那0.01%</p>
+<h4 id="干等"><a href="#干等" class="headerlink" title="干等"></a>干等</h4><p>看上图，放了5分钟都没动静，就完全可以排除开机慢这种情况，这就是一个时间无底洞，不等了，直接找度娘</p>
+<h4 id="搜索无果"><a href="#搜索无果" class="headerlink" title="搜索无果"></a>搜索无果</h4><p>百度搜索报错信息，找不到相同的问题和相关的回答</p>
+<h4 id="广开撒网"><a href="#广开撒网" class="headerlink" title="广开撒网"></a>广开撒网</h4><p>搜索关键词，描述当前的情况，如Ubuntu系统、虚拟机、启动不了等，以及修改了哪个目录下的哪个文件的哪条信息，图中的最后一句 “A start job…finishes up”也尝试拿去搜索。解决方法还没找到，先是发现了一堆相互copy的博客文章，还有一些说法是按F1、F2等键位后修改一些配置文件就能解决问题，然而对于我这台虚拟机中的Ubuntu20，没有任何作用，它只会在Ubuntu图标那个界面一直转圈圈，或是停留在上面图片显示的位置。</p>
+<h4 id="U盘启动"><a href="#U盘启动" class="headerlink" title="U盘启动"></a>U盘启动</h4><p>经过一番挖掘，终于找到了一篇相同问题且回答感觉比较可行的文章</p>
+<p><img src="https://i.loli.net/2021/09/27/oBd8rcOnDil46ey.png" alt="oBd8rcOnDil46ey.png"></p>
+<p>开始U盘启动盘的制作之旅~</p>
+<p>首先用UltraISO打开Ubuntu的ISO文件，然后选择启动中的写入硬盘映像，这里需要将U盘格式化，由于是用于Linux系统，UltralSO会要求将U盘转为FAT32文件系统</p>
+<p><img src="https://i.loli.net/2021/09/27/3LtVDgMBrxnSUCH.png" alt="3LtVDgMBrxnSUCH.png"></p>
+<p>格式化后，选择要制作成启动盘的U盘，点击便捷启动，选择以下选项</p>
+<p><img src="https://i.loli.net/2021/09/27/Zlq8p9iyn1thSdD.png" alt="Zlq8p9iyn1thSdD.png"></p>
+<p>写入成功后U盘启动盘就算制作完成了，因为使用的是虚拟机上的Ubuntu，不能像宿主机那样插入U盘-重启电脑-狂按F2键，虚拟机上的具体操作如下：</p>
+<p>点击虚拟机设置，添加硬盘，选择使用物理磁盘</p>
+<p><img src="https://i.loli.net/2021/09/27/IizDpL8VQgWfRMH.png" alt="IizDpL8VQgWfRMH.png"></p>
+<p>设备选择最下面那个，不确定是哪个的话先添加，而后点新添加的硬盘可以看到磁盘信息，那里有磁盘容量，即可判断是否添加正确了</p>
+<p><img src="https://i.loli.net/2021/09/27/W42lJ8tFD3RboSj.png" alt="W42lJ8tFD3RboSj.png"></p>
+<p><img src="https://i.loli.net/2021/09/27/PTMXb9YQy7eUlvu.png" alt="PTMXb9YQy7eUlvu.png"></p>
+<p>确定添加后，点击以下选项来进入BIOS</p>
+<p><img src="https://i.loli.net/2021/09/27/E72D84fM3rAYeSo.png" alt="E72D84fM3rAYeSo.png"></p>
+<p>虚拟机按F2这些键很难成功进入BIOS，而要在点击进入固件的下一秒马上插入U盘，提前先插入了U盘可能会出现以下错误</p>
+<p><img src="https://i.loli.net/2021/09/28/r9xSZy65JnpwuqL.png" alt="2c17rtCiI8u3QEd-163275741669415.png"></p>
+<p>过慢插入U盘或没有插入U盘则会出现这样的报错</p>
+<p><img src="https://i.loli.net/2021/09/27/aKicNW3bS1xt5CD.png" alt="aKicNW3bS1xt5CD.png"></p>
+<p>进入BIOS后，菜单栏中选中Boot，将刚才新添加的硬盘即U盘启动盘移至最上方，保存并退出</p>
+<p><img src="http://i.loli.net/2021/09/27/yeALNm4v37wSIkH.png" alt="yeALNm4v37wSIkH.png"></p>
+<p>重启后就会进入Ubuntu安装界面，按文章所说的选择Try Ubuntu，进入Ubuntu桌面，Ctrl+Alt+T打开终端，距离成功只有一步之遥！只要将那个被我修改了文件的硬盘挂载到现在这个Ubuntu系统所在的U盘上，就可以访问那个被修改的文件将其改回来了，执行以下命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mount /dev/sda1 .</span><br></pre></td></tr></table></figure>
+
+<p>报错。。。</p>
+<p><code>cannot allocate memory</code></p>
+<p>无法分配内存？！经过一番检查发现，原有的硬盘有20多G，而我使用的U盘只有14.8G，内存不够无法挂载，竟是硬伤 (இдஇ; )</p>
+<h4 id="格局打开"><a href="#格局打开" class="headerlink" title="格局打开"></a>格局打开</h4><p>按道理U盘启动的方法是可行的，只是因为受到硬件问题的限制</p>
+<p>但这个方法操作上确实比较麻烦，后来从大佬那里得知一个特别便捷的操作方式，格局瞬间打开</p>
+<p>只要将那个被修改了文件的Ubuntu硬盘添加到另一个虚拟机上（需要是Linux系统），操作和上面添加U盘启动盘的一样，只要注意选择使用现有虚拟磁盘，并选择对应的vmdk文件即可，我将其添加到了kali机上，开机后就能看到两个可移动卷，分别是系统分区和个人文件分区的文件，找到被修改的文件将内容改回来并保存，将这块硬盘从kali机上移除，然后就可以正常启动Ubuntu了。</p>
+<p><img src="http://i.loli.net/2021/09/27/oy95xzObw2HKQBD.png" alt="oy95xzObw2HKQBD.png"></p>
+<h3 id="由点到线"><a href="#由点到线" class="headerlink" title="由点到线"></a>由点到线</h3><p>填坑的过程中，相关的问题也逐一出现</p>
+<ol>
+<li><a href="">根目录内存不足，如何给磁盘扩容、调整分区？</a></li>
+<li><a href="">调整分区后出现开机一分半的问题怎么解决？</a></li>
+<li><a href="">硬盘挂载到其它虚拟机，后面挂载回来启动时却显示“父虚拟磁盘已被修改”无法开机？</a></li>
+</ol>
+]]></content>
+  </entry>
+</search>
