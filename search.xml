@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Ubuntu如何给磁盘扩容、调整分区事件</title>
+    <url>/2021/10/09/Ubuntu%E5%A6%82%E4%BD%95%E7%BB%99%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9%E3%80%81%E8%B0%83%E6%95%B4%E5%88%86%E5%8C%BA/</url>
+    <content><![CDATA[<h3 id="事件起因"><a href="#事件起因" class="headerlink" title="事件起因"></a>事件起因</h3><p>由于安装Ubuntu时没有分配好空间，在玩弄过程中突然就跳出一个显示框：根目录内存不足。看了一下才发现，根目录就剩100多M，然而还有30G未分配的磁盘空间。</p>
+<p>莫办法，那就分呗……</p>
+<span id="more"></span>
+
+<h3 id="填坑经过"><a href="#填坑经过" class="headerlink" title="填坑经过"></a>填坑经过</h3><h4 id="磁盘扩容"><a href="#磁盘扩容" class="headerlink" title="磁盘扩容"></a>磁盘扩容</h4><p>虚拟机上如果要扩展磁盘容量，直接在虚拟机设置里就可以扩展（但需要删除快照，有快照是扩展不了的）</p>
+<p><img src="https://i.loli.net/2021/10/09/j2MzpEWFJihLPeU.png" alt="p1.png"></p>
+<p>但因为我不是总磁盘容量不够，而是有部分空间未分配，浪费了，所以我要做的是用分区工具将未分配的空间分一部分给根目录，如果未分配的空间刚好与待分配空间的分区相邻，那可以直接用Ubuntu自带的工具进行分配</p>
+<p><img src="https://i.loli.net/2021/10/09/xZvGikdSbPQsflR.png" alt="p2.png"></p>
+<h4 id="制作分区工具gparted的live-usb"><a href="#制作分区工具gparted的live-usb" class="headerlink" title="制作分区工具gparted的live usb"></a>制作分区工具gparted的live usb</h4><p>但刚好我那部分未分配的空间与根目录不相邻，所以只能采用U盘启动的方式，然后用工具去调整分区了（开机时无法调整），我这里选择的分区工具是gparted，首先下载好gparted的iso文件，用Ubuntu自带的启动盘创建器制作U盘启动盘（在windows下用UltraISO制作的启动盘无法启动）</p>
+<p><img src="https://i.loli.net/2021/10/09/nC6f1FIP9lE4yzr.png" alt="p3.png"></p>
+<p><img src="https://i.loli.net/2021/10/09/F9DugjV6EYZTfvQ.png" alt="p4.png"></p>
+<p>制作好后就可以用启动盘来启动了，具体操作方法见<a href="%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94Unity%E4%B8%8EGNOME%E6%A1%8C%E9%9D%A2%E5%88%87%E6%8D%A2.md">踩坑记录——Unity与GNOME桌面切换.md</a>，选择默认设置选项，要进行一些简单的设置</p>
+<p><img src="https://i.loli.net/2021/10/09/6GfBXM83oJ1D4HC.png" alt="p5.png"></p>
+<p>这里选择<code>Don&#39;t touch keymap</code>这个选项</p>
+<p><img src="https://i.loli.net/2021/10/09/67ULWnTAivf3YVm.png" alt="p6.png"></p>
+<p>后面两个问题分别写26和0，26指的就是简体中文</p>
+<p><img src="https://i.loli.net/2021/10/09/nZj7HleCRWGIkmu.png" alt="p7.png"></p>
+<p>成功启动</p>
+<p><img src="https://i.loli.net/2021/10/09/swcPl5Q1vkHWjmX.png" alt="p8.png"></p>
+<h4 id="使用gparted调整分区"><a href="#使用gparted调整分区" class="headerlink" title="使用gparted调整分区"></a>使用gparted调整分区</h4><p>因为根目录所在的sda5分区与未分配的空间之间隔了两个分区，而挪动这部分空间的方式，就是把“路过”的分区一一进行调整，调整这些分区的前后空闲区的大小，例如先把未分配的空间移动到sda7分区前面，操作如下：</p>
+<p>右键sda7分区，选择<code>调整大小/移动</code></p>
+<p><img src="https://i.loli.net/2021/10/09/XfoitxdEV9jc2Rn.png" alt="p9.png"></p>
+<p>直接将整个sda7分区拖到最后</p>
+<p><img src="https://i.loli.net/2021/10/09/TMwo4WEthpYPsBH.png" alt="p10.png"></p>
+<p>点击下一步，这样未分配的空间就到sda7分区前面了</p>
+<p><img src="https://i.loli.net/2021/10/09/6fXrmkZu3OChHjS.png" alt="p11.png"></p>
+<p>按照该方法操作，最后就可以将空间分配给sda5分区了</p>
+<p><img src="https://i.loli.net/2021/10/09/DnBHOUSr6fCb1ML.png" alt="p12.png"></p>
+<p>点击绿色的√应用全部操作，然后关闭机子，拨出启动盘，重新启动Ubuntu，就可以看到根目录内存已经扩大了</p>
+<p><img src="https://i.loli.net/2021/10/09/meJcgT4laxD9fbS.png" alt="p13.png"></p>
+]]></content>
+  </entry>
+  <entry>
     <title>踩坑记录——Unity与GNOME桌面切换</title>
     <url>/2021/09/16/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94Unity%E4%B8%8EGNOME%E6%A1%8C%E9%9D%A2%E5%88%87%E6%8D%A2/</url>
     <content><![CDATA[<h3 id="事件起因"><a href="#事件起因" class="headerlink" title="事件起因"></a>事件起因</h3><p>在进行Ubuntu的Unity和GNOME桌面环境实验过程中，Ubuntu系统已经安装并使用了Unity桌面，在从Unity切换为GNOME的时候</p>
@@ -49,7 +84,7 @@
 <p><img src="http://i.loli.net/2021/09/27/oy95xzObw2HKQBD.png" alt="oy95xzObw2HKQBD.png"></p>
 <h3 id="由点到线"><a href="#由点到线" class="headerlink" title="由点到线"></a>由点到线</h3><p>填坑的过程中，相关的问题也逐一出现</p>
 <ol>
-<li><a href="">根目录内存不足，如何给磁盘扩容、调整分区？</a></li>
+<li><a href="Ubuntu%E5%A6%82%E4%BD%95%E7%BB%99%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9%E3%80%81%E8%B0%83%E6%95%B4%E5%88%86%E5%8C%BA.md">根目录内存不足，如何给磁盘扩容、调整分区？</a></li>
 <li><a href="">调整分区后出现开机一分半的问题怎么解决？</a></li>
 <li><a href="">硬盘挂载到其它虚拟机，后面挂载回来启动时却显示“父虚拟磁盘已被修改”无法开机？</a></li>
 </ol>
