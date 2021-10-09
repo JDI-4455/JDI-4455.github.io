@@ -14,7 +14,7 @@
 <h4 id="制作分区工具gparted的live-usb"><a href="#制作分区工具gparted的live-usb" class="headerlink" title="制作分区工具gparted的live usb"></a>制作分区工具gparted的live usb</h4><p>但刚好我那部分未分配的空间与根目录不相邻，所以只能采用U盘启动的方式，然后用工具去调整分区了（开机时无法调整），我这里选择的分区工具是gparted，首先下载好gparted的iso文件，用Ubuntu自带的启动盘创建器制作U盘启动盘（在windows下用UltraISO制作的启动盘无法启动）</p>
 <p><img src="https://i.loli.net/2021/10/09/nC6f1FIP9lE4yzr.png" alt="p3.png"></p>
 <p><img src="https://i.loli.net/2021/10/09/F9DugjV6EYZTfvQ.png" alt="p4.png"></p>
-<p>制作好后就可以用启动盘来启动了，具体操作方法见<a href="%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94Unity%E4%B8%8EGNOME%E6%A1%8C%E9%9D%A2%E5%88%87%E6%8D%A2.md">踩坑记录——Unity与GNOME桌面切换.md</a>，选择默认设置选项，要进行一些简单的设置</p>
+<p>制作好后就可以用启动盘来启动了，具体操作方法见<a href="https://justdit.top/2021/09/16/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94Unity%E4%B8%8EGNOME%E6%A1%8C%E9%9D%A2%E5%88%87%E6%8D%A2">踩坑记录——Unity与GNOME桌面切换.md</a>，选择默认设置选项，要进行一些简单的设置</p>
 <p><img src="https://i.loli.net/2021/10/09/6GfBXM83oJ1D4HC.png" alt="p5.png"></p>
 <p>这里选择<code>Don&#39;t touch keymap</code>这个选项</p>
 <p><img src="https://i.loli.net/2021/10/09/67ULWnTAivf3YVm.png" alt="p6.png"></p>
@@ -84,7 +84,7 @@
 <p><img src="http://i.loli.net/2021/09/27/oy95xzObw2HKQBD.png" alt="oy95xzObw2HKQBD.png"></p>
 <h3 id="由点到线"><a href="#由点到线" class="headerlink" title="由点到线"></a>由点到线</h3><p>填坑的过程中，相关的问题也逐一出现</p>
 <ol>
-<li><a href="Ubuntu%E5%A6%82%E4%BD%95%E7%BB%99%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9%E3%80%81%E8%B0%83%E6%95%B4%E5%88%86%E5%8C%BA.md">根目录内存不足，如何给磁盘扩容、调整分区？</a></li>
+<li><a href="https://justdit.top/2021/10/09/Ubuntu%E5%A6%82%E4%BD%95%E7%BB%99%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9%E3%80%81%E8%B0%83%E6%95%B4%E5%88%86%E5%8C%BA">根目录内存不足，如何给磁盘扩容、调整分区？</a></li>
 <li><a href="">调整分区后出现开机一分半的问题怎么解决？</a></li>
 <li><a href="">硬盘挂载到其它虚拟机，后面挂载回来启动时却显示“父虚拟磁盘已被修改”无法开机？</a></li>
 </ol>
