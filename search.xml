@@ -56,7 +56,7 @@
 ]]></content>
   </entry>
   <entry>
-    <title>Ubuntu如何给磁盘扩容、调整分区事件</title>
+    <title>Ubuntu如何给磁盘扩容、调整分区</title>
     <url>/2021/10/09/Ubuntu%E5%A6%82%E4%BD%95%E7%BB%99%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9%E3%80%81%E8%B0%83%E6%95%B4%E5%88%86%E5%8C%BA/</url>
     <content><![CDATA[<h3 id="事件起因"><a href="#事件起因" class="headerlink" title="事件起因"></a>事件起因</h3><p>由于安装Ubuntu时没有分配好空间，在玩弄过程中突然就跳出一个显示框：根目录内存不足。看了一下才发现，根目录就剩100多M，然而还有30G未分配的磁盘空间。</p>
 <p>莫办法，那就分呗……</p>
